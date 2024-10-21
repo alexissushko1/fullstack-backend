@@ -17,11 +17,11 @@ Content-Type: application/json
   "profileImage": "www.google.image.com",
   "email": "346902747@gmail.com",
   "phone": "13533197233",
-  "department": 1
+  "departmentId": 1
 }
 
 ### Delete a specific professor
-DELETE {{host}}/professors/4
+DELETE {{host}}/professors/2
 
 ### Change the information of an existing professor
 PUT {{host}}/professors/5

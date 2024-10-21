@@ -29,7 +29,7 @@ router.get("/:id", async (req, res, next) => {
 
 // POST/professors should add a new professor
 router.post("/", async (req, res, next) => {
-  const { name, bio, profileImage, email, phone } = req.body;
+  const { name, bio, profileImage, email, phone, departmentId } = req.body;
 
   // Check if name was provided
   if (!name) {
