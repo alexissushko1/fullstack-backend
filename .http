@@ -8,3 +8,10 @@ GET {{host}}/departments/1
 
 ### Post a new department if logged in
 POST {{host}}/departments
+
+### Update a department with name, description, or image when logged in
+PUT {{host}}/departments/1
+
+
+### When logged in, delete a specific department
+DELETE {{host}}/departments/1

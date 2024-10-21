@@ -6,6 +6,8 @@ const PORT = 3000;
 app.use(require("morgan")("dev"));
 app.use(express.json());
 
+app.use("/departments", require("./api/departments"));
+
 //404 middleware
 app.use((req, res, next) => {
   next({ status: 404, message: "Endpoint not found" });

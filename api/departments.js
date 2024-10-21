@@ -1,7 +1,7 @@
 //Import express, create router, import authenticate and prisma
 const express = require("express");
 const router = express.Router();
-const { authenticate } = require("./auth");
+//const { authenticate } = require("./auth");
 const prisma = require("../prisma");
 
 //Create get route to get all departments, catch errors and pass to next error handler
@@ -60,54 +60,92 @@ router.get("/:id", async (req, res, next) => {
  * @throws {Error} if issue creating department
  */
 
-router.post("/", authenticate, async (req, res, next) => {
-  const {
-    name,
-    description,
-    image,
-    departmentEmail,
-    departmentPhone,
-    professorIds,
-  } = req.body;
-  try {
-    const department = await prisma.department.create({
-      data: {
-        name,
-        description,
-        image,
-        departmentEmail,
-        departmentPhone,
-        professors: { connect: professorIds.map((id) => ({ id })) },
-      },
-    });
-    res.status(201).json(department);
-  } catch (e) {
-    next(e);
+router.post(
+  "/",
+  /*authenticate, */ async (req, res, next) => {
+    const {
+      name,
+      description,
+      image,
+      departmentEmail,
+      departmentPhone,
+      professorIds,
+    } = req.body;
+    try {
+      const department = await prisma.department.create({
+        data: {
+          name,
+          description,
+          image,
+          departmentEmail,
+          departmentPhone,
+          professors: { connect: professorIds.map((id) => ({ id })) },
+        },
+      });
+      res.status(201).json(department);
+    } catch (e) {
+      next(e);
+    }
   }
-});
+);
 
 //Create a put route so, when logged in, can change the name, description, or banner image of an existing department
 /**
  * @route PUT
  * @group departments
- * @
+ * @security JWT
+ * @param {String} id
+ * @param {String} name
+ * @param {String} description
+ * @param {String} image
+ * @returns {Object} updatedDepartment
+ * @throws {Error} error if issue updating department
  */
 
-router.put("/:id", authenticate, async (req, res, next) => {
-  const { id } = req.params;
-  const { name, description, image } = req.body;
-  try {
-    const department = await prisma.department.findUniqueOrThrow({
-      where: { id: +id },
-    });
-    const updatedDepartment = await prisma.department.update({
-      where: { id: +id },
-      data: { name, description, image },
-    });
-    res.json(updatedDepartment);
-  } catch (e) {
-    next(e);
+router.put(
+  "/:id",
+  /*authenticate, */ async (req, res, next) => {
+    const { id } = req.params;
+    const { name, description, image } = req.body;
+    try {
+      const department = await prisma.department.findUniqueOrThrow({
+        where: { id: +id },
+      });
+      const updatedDepartment = await prisma.department.update({
+        where: { id: +id },
+        data: { name, description, image },
+      });
+      res.json(updatedDepartment);
+    } catch (e) {
+      next(e);
+    }
   }
-});
+);
+
+//Create a delete route that, when logged in, deletes a department with a specific id
+/**
+ * @route DELETE /
+ * @group departments
+ * @security JWT
+ * @param {String} id
+ * @returns {Promise<void>} 204 if successful
+ * @throws {Error} if issue deleting department
+ */
+
+router.delete(
+  "/:id",
+  /* authenticate, */ async (req, res, next) => {
+    const { id } = req.params;
+    try {
+      const department = await prisma.department.findUniqueOrThrow({
+        where: { id: +id },
+      });
+      await prisma.department.delete({ where: { id: +id } });
+      res.sendStatus(204);
+    } catch (e) {
+      next(e);
+    }
+  }
+);
 
 module.exports = router;
