@@ -8,7 +8,7 @@ GET {{host}}/professors/3
 
 ### Add a new professor
 POST {{host}}/professors
-# Authorization: Bearer {{token}}
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
@@ -22,10 +22,12 @@ Content-Type: application/json
 
 ### Delete a specific professor
 DELETE {{host}}/professors/2
+Authorization: Bearer {{token}}
+Content-Type: application/json
 
 ### Change the information of an existing professor
 PUT {{host}}/professors/5
-# Authorization: Bearer {{token}}
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
