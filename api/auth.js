@@ -45,3 +45,23 @@ router.post("/register", async (req, res, next) => {
     next(error);
   }
 });
+
+router.post("/login", async (req, res, next) => {
+  const { username, password } = req.body;
+  try {
+    const user = await prisma.user.login(username, password);
+    const token = createToken(user.id);
+    res.json({ token });
+  } catch (error) {
+    next(error);
+  }
+});
+
+/** Checks the request for an authenticated user. */
+function authenticate(req, res, next) {
+  if (req.user) {
+    next();
+  } else {
+    next({ status: 401, message: "You must be logged in." });
+  }
+}
