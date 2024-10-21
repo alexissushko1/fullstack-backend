@@ -2,3 +2,6 @@
 
 ### Get all departments
 GET {{host}}/departments
+
+### Get department with a specific id
+GET {{host}}/departments/1
