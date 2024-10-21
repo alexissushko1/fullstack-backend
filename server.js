@@ -1,29 +1,3 @@
-const express = require("express");
-const app = express();
-const PORT = 3000;
-app.use(express.json());
-
-// Router for professors
-app.use("/professors", require("./api/professors"));
-
-// Logging middleware
-app.use((req, res, next) => {
-  console.log(`${req.method} ${req.originalUrl}`);
-  next();
-});
-// 404
-app.use((req, res, next) => {
-  next({ status: 404, message: "Endpoint not found." });
-});
-// Error-handling
-app.use((err, req, res, next) => {
-  console.error(err);
-  res.status(err.status ?? 500);
-  res.json(err.message ?? "Sorry, something went wrong :(");
-});
-app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}...`);
-});
 require("dotenv").config();
 const express = require("express");
 const app = express();
@@ -33,6 +7,9 @@ app.use(require("morgan")("dev"));
 app.use(express.json());
 
 app.use(require("./api/auth").router);
+
+// Router for professors
+app.use("/professors", require("./api/professors"));
 
 //404 middleware
 app.use((req, res, next) => {
