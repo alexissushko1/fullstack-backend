@@ -65,3 +65,5 @@ function authenticate(req, res, next) {
     next({ status: 401, message: "You must be logged in." });
   }
 }
+
+module.exports = { router, authenticate };
