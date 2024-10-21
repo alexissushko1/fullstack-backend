@@ -85,4 +85,29 @@ router.post("/", authenticate, async (req, res, next) => {
     next(e);
   }
 });
+
+//Create a put route so, when logged in, can change the name, description, or banner image of an existing department
+/**
+ * @route PUT
+ * @group departments
+ * @
+ */
+
+router.put("/:id", authenticate, async (req, res, next) => {
+  const { id } = req.params;
+  const { name, description, image } = req.body;
+  try {
+    const department = await prisma.department.findUniqueOrThrow({
+      where: { id: +id },
+    });
+    const updatedDepartment = await prisma.department.update({
+      where: { id: +id },
+      data: { name, description, image },
+    });
+    res.json(updatedDepartment);
+  } catch (e) {
+    next(e);
+  }
+});
+
 module.exports = router;
