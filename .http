@@ -1,0 +1,22 @@
+@host = http://localhost:3000
+
+### Register new user
+POST {{host}}/register
+Content-Type: application/json
+
+{
+    "username": "foo@bar.com",
+    "password": "foobar"
+}
+
+### Login
+# @name login
+POST {{host}}/login
+Content-Type: application/json
+
+{
+    "username": "foo@bar.com",
+    "password": "foobar"
+}
+
+@token = {{login.response.body.token}}
