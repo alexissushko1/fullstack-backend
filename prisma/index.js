@@ -10,7 +10,7 @@ const prisma = new PrismaClient().$extends({
         });
         return user;
       },
-      async login(email, password) {
+      async login(username, password) {
         const user = await prisma.user.findUniqueOrThrow({
           where: { username },
         });
