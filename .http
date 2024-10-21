@@ -1,5 +1,6 @@
 @host = http://localhost:3000
 
+<<<<<<< HEAD
 ### Get all departments
 GET {{host}}/departments
 
@@ -15,3 +16,25 @@ PUT {{host}}/departments/1
 
 ### When logged in, delete a specific department
 DELETE {{host}}/departments/1
+=======
+### Register new user
+POST {{host}}/register
+Content-Type: application/json
+
+{
+    "username": "foo@bar.com",
+    "password": "foobar"
+}
+
+### Login
+# @name login
+POST {{host}}/login
+Content-Type: application/json
+
+{
+    "username": "foo@bar.com",
+    "password": "foobar"
+}
+
+@token = {{login.response.body.token}}
+>>>>>>> bf490457539948d11176bff5bf54119a04e06b95

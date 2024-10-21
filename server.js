@@ -7,6 +7,7 @@ app.use(require("morgan")("dev"));
 app.use(express.json());
 
 app.use("/departments", require("./api/departments"));
+app.use(require("./api/auth").router);
 
 //404 middleware
 app.use((req, res, next) => {
