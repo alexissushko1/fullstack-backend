@@ -5,3 +5,6 @@ GET {{host}}/departments
 
 ### Get department with a specific id
 GET {{host}}/departments/1
+
+### Post a new department if logged in
+POST {{host}}/departments

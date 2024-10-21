@@ -44,4 +44,45 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
+//Create a post route, so when logged in, can add a department
+/**
+ * @route POST /
+ * @group departments
+ * @security JWT
+ * @param {Object} department body
+ * @param {String} name
+ * @param {String} description
+ * @param {String} image
+ * @param {String} departmentEmail
+ * @param {String} departmentPhone
+ * @param {Array<number>} array of professor Ids
+ * @return {Object} department
+ * @throws {Error} if issue creating department
+ */
+
+router.post("/", authenticate, async (req, res, next) => {
+  const {
+    name,
+    description,
+    image,
+    departmentEmail,
+    departmentPhone,
+    professorIds,
+  } = req.body;
+  try {
+    const department = await prisma.department.create({
+      data: {
+        name,
+        description,
+        image,
+        departmentEmail,
+        departmentPhone,
+        professors: { connect: professorIds.map((id) => ({ id })) },
+      },
+    });
+    res.status(201).json(department);
+  } catch (e) {
+    next(e);
+  }
+});
 module.exports = router;
