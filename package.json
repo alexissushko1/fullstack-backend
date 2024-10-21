@@ -2,6 +2,7 @@
   "devDependencies": {
     "@faker-js/faker": "^9.0.3",
     "morgan": "^1.10.0",
+    "nodemon": "^3.1.7",
     "prisma": "^5.21.1"
   },
   "dependencies": {
@@ -12,5 +13,8 @@
   },
   "prisma": {
     "seed": "node prisma/seed.js"
+  },
+  "scripts": {
+    "dev": "nodemon server.js"
   }
 }
