@@ -55,5 +55,5 @@ Content-Type: application/json
 
 
 ### When logged in, delete a specific department
-DELETE {{host}}/departments/8
+DELETE {{host}}/departments/10
 Authorization: Bearer {{token}}
