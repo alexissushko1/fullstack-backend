@@ -114,7 +114,7 @@ router.delete("/:id", authenticate, async (req, res, next) => {
 // PUT /professors/:id updates the specific professor
 router.put("/:id", authenticate, async (req, res, next) => {
   const { id } = req.params;
-  const { name, bio, profileImage, email, phone } = req.body;
+  const { name, bio, profileImage, email, phone, departmentId } = req.body;
 
   // Check if name was provided
   if (!name) {
@@ -156,6 +156,14 @@ router.put("/:id", authenticate, async (req, res, next) => {
     });
   }
 
+  // Check if departmentId was provided
+  if (!departmentId) {
+    return next({
+      status: 400,
+      message: "A new departmentId must be provided.",
+    });
+  }
+
   try {
     // Check if the professor exists
     const professor = await prisma.professor.findUnique({ where: { id: +id } });
@@ -169,7 +177,7 @@ router.put("/:id", authenticate, async (req, res, next) => {
     // Update the professor
     const updatedProfessor = await prisma.professor.update({
       where: { id: +id },
-      data: { name, email, bio, profileImage },
+      data: { name, email, bio, profileImage, departmentId },
     });
     res.json(updatedProfessor);
   } catch (e) {

@@ -36,7 +36,8 @@ Content-Type: application/json
   "bio": "Foobar baz wobble!",
   "profileImage": "www.google.image.com",
   "email": "346902747@gmail.com",
-  "phone": "13533197233"
+  "phone": "13533197233",
+  "departmentId": 2
 }
 
 ### Register new user
