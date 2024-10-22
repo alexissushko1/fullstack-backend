@@ -8,6 +8,9 @@ app.use(express.json());
 
 app.use(require("./api/auth").router);
 
+// Router for professors
+app.use("/professors", require("./api/professors"));
+
 //404 middleware
 app.use((req, res, next) => {
   next({ status: 404, message: "Endpoint not found" });

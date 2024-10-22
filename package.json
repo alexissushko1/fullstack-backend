@@ -1,9 +1,16 @@
 {
+  "name": "41-university",
+  "version": "1.0.0",
+  "description": "Fullstack University is a web platform that will allow the university to manage its academic departments and faculty.",
+  "main": "server.js",
+  "directories": {
+    "doc": "docs"
+  },
   "devDependencies": {
     "@faker-js/faker": "^9.0.3",
-    "morgan": "^1.10.0",
+    "prisma": "^5.21.1",
     "nodemon": "^3.1.7",
-    "prisma": "^5.21.1"
+    "morgan": "^1.10.0"
   },
   "dependencies": {
     "@prisma/client": "^5.21.1",
