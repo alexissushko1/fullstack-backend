@@ -7,6 +7,7 @@ app.use(require("morgan")("dev"));
 app.use(express.json());
 
 app.use(require("./api/auth").router);
+app.use("/departments", require("./api/departments"));
 
 // Router for professors
 app.use("/professors", require("./api/professors"));

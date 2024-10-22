@@ -59,3 +59,41 @@ Content-Type: application/json
     "password": "foobar"
 }
 
+### Get all departments
+GET {{host}}/departments
+
+### Get department with a specific id
+GET {{host}}/departments/1
+
+###Store login token
+@token = {{login.response.body.token}}
+
+### Post a new department if logged in
+POST {{host}}/departments
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "name": "Department Name",
+    "description": "Department Description",
+    "image": "https://picsum.photos/200",
+    "departmentEmail": "foo@bar.com",
+    "departmentPhone": "123-456-7890",
+    "professorIds": [1,2,3]
+}
+
+### Update a department with name, description, or image when logged in
+PUT {{host}}/departments/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "name": "Updated Department Name",
+    "description": "Updated Department Description",
+    "image": "https://picsum.photos/200"
+}
+
+
+### When logged in, delete a specific department
+DELETE {{host}}/departments/10
+Authorization: Bearer {{token}}
