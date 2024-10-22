@@ -60,7 +60,7 @@ router.get("/:id", async (req, res, next) => {
  * @throws {Error} if issue creating department
  */
 
-router.post("/", async (req, res, next) => {
+router.post("/", authenticate, async (req, res, next) => {
   const {
     name,
     description,
@@ -100,7 +100,7 @@ router.post("/", async (req, res, next) => {
  * @throws {Error} error if issue updating department
  */
 
-router.put("/:id", async (req, res, next) => {
+router.put("/:id", authenticate, async (req, res, next) => {
   const { id } = req.params;
   const { name, description, image } = req.body;
   try {
@@ -127,7 +127,7 @@ router.put("/:id", async (req, res, next) => {
  * @throws {Error} if issue deleting department
  */
 
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:id", authenticate, async (req, res, next) => {
   const { id } = req.params;
   try {
     const department = await prisma.department.findUniqueOrThrow({

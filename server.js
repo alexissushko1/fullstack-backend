@@ -6,8 +6,8 @@ const PORT = 3000;
 app.use(require("morgan")("dev"));
 app.use(express.json());
 
-app.use("/departments", require("./api/departments"));
 app.use(require("./api/auth").router);
+app.use("/departments", require("./api/departments"));
 
 //404 middleware
 app.use((req, res, next) => {

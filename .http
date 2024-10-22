@@ -19,16 +19,18 @@ Content-Type: application/json
     "password": "foobar"
 }
 
-@token = {{login.response.body.token}}
-
 ### Get all departments
 GET {{host}}/departments
 
 ### Get department with a specific id
 GET {{host}}/departments/1
 
+###Store login token
+@token = {{login.response.body.token}}
+
 ### Post a new department if logged in
 POST {{host}}/departments
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
@@ -42,6 +44,7 @@ Content-Type: application/json
 
 ### Update a department with name, description, or image when logged in
 PUT {{host}}/departments/1
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
@@ -52,4 +55,5 @@ Content-Type: application/json
 
 
 ### When logged in, delete a specific department
-DELETE {{host}}/departments/1
+DELETE {{host}}/departments/8
+Authorization: Bearer {{token}}
