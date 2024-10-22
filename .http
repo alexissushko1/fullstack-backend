@@ -1,22 +1,5 @@
 @host = http://localhost:3000
 
-<<<<<<< HEAD
-### Get all departments
-GET {{host}}/departments
-
-### Get department with a specific id
-GET {{host}}/departments/1
-
-### Post a new department if logged in
-POST {{host}}/departments
-
-### Update a department with name, description, or image when logged in
-PUT {{host}}/departments/1
-
-
-### When logged in, delete a specific department
-DELETE {{host}}/departments/1
-=======
 ### Register new user
 POST {{host}}/register
 Content-Type: application/json
@@ -37,4 +20,36 @@ Content-Type: application/json
 }
 
 @token = {{login.response.body.token}}
->>>>>>> bf490457539948d11176bff5bf54119a04e06b95
+
+### Get all departments
+GET {{host}}/departments
+
+### Get department with a specific id
+GET {{host}}/departments/1
+
+### Post a new department if logged in
+POST {{host}}/departments
+Content-Type: application/json
+
+{
+    "name": "Department Name",
+    "description": "Department Description",
+    "image": "https://picsum.photos/200",
+    "departmentEmail": "foo@bar.com",
+    "departmentPhone": "123-456-7890",
+    "professorIds": [1,2,3]
+}
+
+### Update a department with name, description, or image when logged in
+PUT {{host}}/departments/1
+Content-Type: application/json
+
+{
+    "name": "Updated Department Name",
+    "description": "Updated Department Description",
+    "image": "https://picsum.photos/200"
+}
+
+
+### When logged in, delete a specific department
+DELETE {{host}}/departments/1
