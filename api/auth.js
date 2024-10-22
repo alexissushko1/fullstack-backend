@@ -14,7 +14,7 @@ router.use(async (req, res, next) => {
   // Grab token from headers only if it exists
   const authHeader = req.headers.authorization;
   // Slice off the first 7 characters (Bearer ), leaving the token
-  const token = authHeader?.slice(7); // "Bearer <token>"
+  const token = authHeader?.split(" ")[1]; // "Bearer <token>"
   // If there is no token move on to the next middleware
   if (!token) return next();
 
