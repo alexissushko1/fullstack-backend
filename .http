@@ -1,4 +1,5 @@
 @host = http://localhost:3000
+@token = {{login.response.body.token}}
 
 ### Get all professors
 GET {{host}}/professors
@@ -21,12 +22,12 @@ Content-Type: application/json
 }
 
 ### Delete a specific professor
-DELETE {{host}}/professors/2
+DELETE {{host}}/professors/5
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
 ### Change the information of an existing professor
-PUT {{host}}/professors/5
+PUT {{host}}/professors/6
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
@@ -36,14 +37,14 @@ Content-Type: application/json
   "profileImage": "www.google.image.com",
   "email": "346902747@gmail.com",
   "phone": "13533197233"
-}@host = http://localhost:3000
+}
 
 ### Register new user
 POST {{host}}/register
 Content-Type: application/json
 
 {
-    "username": "foo@bar.com",
+    "username": "foo2@bar.com",
     "password": "foobar"
 }
 
@@ -57,4 +58,3 @@ Content-Type: application/json
     "password": "foobar"
 }
 
-@token = {{login.response.body.token}}
