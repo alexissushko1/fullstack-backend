@@ -28,7 +28,7 @@ router.get("/:id", async (req, res, next) => {
 });
 
 // POST/professors should add a new professor
-router.post("/", async (req, res, next) => {
+router.post("/", authenticate, async (req, res, next) => {
   const { name, bio, profileImage, email, phone, departmentId } = req.body;
 
   // Check if name was provided
@@ -89,7 +89,7 @@ router.post("/", async (req, res, next) => {
 });
 
 // DELETE/professors/:id removes the specific professor, this can only be deleted by the logged-in user
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:id", authenticate, async (req, res, next) => {
   const { id } = req.params;
 
   try {
@@ -111,7 +111,7 @@ router.delete("/:id", async (req, res, next) => {
 });
 
 // PUT /professors/:id updates the specific professor
-router.put("/:id", async (req, res, next) => {
+router.put("/:id", authenticate, async (req, res, next) => {
   const { id } = req.params;
   const { name, bio, profileImage, email, phone } = req.body;
 
