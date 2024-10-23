@@ -80,7 +80,7 @@ router.post("/", authenticate, async (req, res, next) => {
         profileImage,
         email,
         phone,
-        departmentId,
+        departmentId: +departmentId,
       },
     });
     res.status(201).json(professor);
