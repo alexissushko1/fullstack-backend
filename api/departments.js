@@ -100,9 +100,10 @@ router.post("/", authenticate, async (req, res, next) => {
  * @throws {Error} error if issue updating department
  */
 
-router.put("/:id/change", async (req, res, next) => {
+router.put("/:id", authenticate, async (req, res, next) => {
   const { id } = req.params;
-  const { name, description, image } = req.body.department;
+  const { name, description, image } = req.body;
+  console.debug(req.params, req.body);
 
   try {
     // Check if the department exists
