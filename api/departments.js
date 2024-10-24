@@ -100,7 +100,7 @@ router.post("/", authenticate, async (req, res, next) => {
  * @throws {Error} error if issue updating department
  */
 
-router.put("/:id", authenticate, async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   const { id } = req.params;
   const { name, description, image } = req.body;
   try {
@@ -132,9 +132,6 @@ router.delete("/:id", authenticate, async (req, res, next) => {
   try {
     const department = await prisma.department.findUniqueOrThrow({
       where: { id: +id },
-    });
-    await prisma.professor.deleteMany({
-      where: { departmentId: +id },
     });
     await prisma.department.delete({ where: { id: +id } });
     res.sendStatus(204);
