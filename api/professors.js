@@ -112,57 +112,9 @@ router.delete("/:id", authenticate, async (req, res, next) => {
 });
 
 // PUT /professors/:id updates the specific professor
-router.post("/:professorId/change", async (req, res, next) => {
+router.put("/:professorId/change", authenticate, async (req, res, next) => {
   const { professorId } = req.params;
   const { name, bio, profileImage, email, phone, departmentId } = req.body;
-
-  // Check if name was provided
-  // if (!name) {
-  //   return next({
-  //     status: 400,
-  //     message: "A new name must be provided.",
-  //   });
-  // }
-
-  // Check if bio was provided
-  // if (!bio) {
-  //   return next({
-  //     status: 400,
-  //     message: "A new bio must be provided.",
-  //   });
-  // }
-
-  // Check if profileImage was provided
-  // if (!profileImage) {
-  //   return next({
-  //     status: 400,
-  //     message: "A new profileImage must be provided.",
-  //   });
-  // }
-
-  // Check if email was provided
-  // if (!email) {
-  //   return next({
-  //     status: 400,
-  //     message: "A new email must be provided.",
-  //   });
-  // }
-
-  // Check if phone was provided
-  // if (!phone) {
-  //   return next({
-  //     status: 400,
-  //     message: "A new phone must be provided.",
-  //   });
-  // }
-
-  // Check if departmentId was provided
-  // if (!departmentId) {
-  //   return next({
-  //     status: 400,
-  //     message: "A new departmentId must be provided.",
-  //   });
-  // }
 
   try {
     // Check if the professor exists
