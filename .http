@@ -1,5 +1,23 @@
 @host = http://localhost:3000
-@token = {{login.response.body.token}}
+
+### Register new user
+POST {{host}}/register
+Content-Type: application/json
+
+{
+    "username": "foo@bar.com",
+    "password": "foobar"
+}
+
+### Login
+# @name login
+POST {{host}}/login
+Content-Type: application/json
+
+{
+    "username": "foo@bar.com",
+    "password": "foobar"
+}
 
 ### Get all professors
 GET {{host}}/professors
@@ -40,30 +58,11 @@ Content-Type: application/json
   "departmentId": 2
 }
 
-### Register new user
-POST {{host}}/register
-Content-Type: application/json
-
-{
-    "username": "foo2@bar.com",
-    "password": "foobar"
-}
-
-### Login
-# @name login
-POST {{host}}/login
-Content-Type: application/json
-
-{
-    "username": "foo2@bar.com",
-    "password": "foobar"
-}
-
 ### Get all departments
 GET {{host}}/departments
 
 ### Get department with a specific id
-GET {{host}}/departments/1
+GET {{host}}/departments/2
 
 ###Store login token
 # @token = {{login.response.body.token}}
@@ -79,13 +78,13 @@ Content-Type: application/json
     "image": "https://picsum.photos/200",
     "departmentEmail": "foo@bar.com",
     "departmentPhone": "123-456-7890",
-    "professorIds": [1,2,3]
+    "professorIds": [1]
 }
 
 ### Update a department with name, description, or image when logged in
-PUT {{host}}/departments/1
-Authorization: Bearer {{token}}
-Content-Type: application/json
+PUT {{host}}/departments/20/change
+# Authorization: Bearer {{token}},
+# Content-Type: application/json
 
 {
     "name": "Updated Department Name",

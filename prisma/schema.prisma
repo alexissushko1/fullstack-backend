@@ -36,6 +36,6 @@ model Professor {
   profileImage String
   email String
   phone String
-  department Department @relation(fields: [departmentId], references: [id])
-  departmentId Int
+  department Department? @relation(fields: [departmentId], references: [id], onDelete: SetNull)
+  departmentId Int? 
 }

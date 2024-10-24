@@ -103,20 +103,43 @@ router.post("/", authenticate, async (req, res, next) => {
 router.put("/:id", authenticate, async (req, res, next) => {
   const { id } = req.params;
   const { name, description, image } = req.body;
+  console.debug(req.params, req.body);
+
   try {
+    // Check if the department exists
     const department = await prisma.department.findUniqueOrThrow({
       where: { id: +id },
     });
+    if (!department) {
+      return next({
+        status: 404,
+        message: `Department ${id} does not exist`,
+      });
+    }
+
+    console.log("Request Body:", req.body);
+    // Construct update data
+    const updateData = {};
+    if (name) updateData.name = name;
+    if (description) updateData.description = description;
+    if (image) updateData.image = image;
+    console.log(updateData);
+    // Check if there is data to update
+    if (Object.keys(updateData).length === 0) {
+      return res.status(400).json({ message: "No data provided to update" });
+    }
+
+    // Update the department
     const updatedDepartment = await prisma.department.update({
       where: { id: +id },
-      data: { name, description, image },
+      data: updateData,
     });
+
     res.json(updatedDepartment);
   } catch (e) {
     next(e);
   }
 });
-
 //Create a delete route that, when logged in, deletes a department with a specific id
 /**
  * @route DELETE /
@@ -132,9 +155,6 @@ router.delete("/:id", authenticate, async (req, res, next) => {
   try {
     const department = await prisma.department.findUniqueOrThrow({
       where: { id: +id },
-    });
-    await prisma.professor.deleteMany({
-      where: { departmentId: +id },
     });
     await prisma.department.delete({ where: { id: +id } });
     res.sendStatus(204);
