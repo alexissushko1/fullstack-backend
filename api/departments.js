@@ -107,7 +107,7 @@ router.put("/:id", authenticate, async (req, res, next) => {
 
   try {
     // Check if the department exists
-    const department = await prisma.department.findUnique({
+    const department = await prisma.department.findUniqueOrThrow({
       where: { id: +id },
     });
     if (!department) {
@@ -135,7 +135,6 @@ router.put("/:id", authenticate, async (req, res, next) => {
       data: updateData,
     });
 
-    console.log("Updated Department:", updatedDepartment);
     res.json(updatedDepartment);
   } catch (e) {
     next(e);
