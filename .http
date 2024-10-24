@@ -82,9 +82,9 @@ Content-Type: application/json
 }
 
 ### Update a department with name, description, or image when logged in
-PUT {{host}}/departments/20
-Authorization: Bearer {{token}},
-Content-Type: application/json
+PUT {{host}}/departments/20/change
+# Authorization: Bearer {{token}},
+# Content-Type: application/json
 
 {
     "name": "Updated Department Name",
