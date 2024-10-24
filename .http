@@ -65,7 +65,7 @@ GET {{host}}/departments
 GET {{host}}/departments/2
 
 ###Store login token
-@token = {{login.response.body.token}}
+# @token = {{login.response.body.token}}
 
 ### Post a new department if logged in
 POST {{host}}/departments
